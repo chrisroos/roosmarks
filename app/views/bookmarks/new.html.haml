@@ -1,0 +1,14 @@
+%h1 New bookmark
+
+= form_for @bookmark do |bookmark_form|
+  %p
+    = bookmark_form.label :url
+    = bookmark_form.text_field :url
+  %p
+    = bookmark_form.label :title
+    = bookmark_form.text_field :title
+  %p
+    = bookmark_form.label :comments
+    = bookmark_form.text_area :comments
+  %p
+    = bookmark_form.submit 'Create bookmark'
