@@ -1,0 +1,7 @@
+%h1 Bookmarks
+
+%ul#bookmarks
+  - @bookmarks.each do |bookmark|
+    %li.bookmark
+      .url= bookmark.url
+      .title= bookmark.title
