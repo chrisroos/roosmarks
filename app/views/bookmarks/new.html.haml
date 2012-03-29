@@ -8,6 +8,9 @@
     = bookmark_form.label :title
     = bookmark_form.text_field :title
   %p
+    = bookmark_form.label :tag_names, 'Tags'
+    = bookmark_form.text_field :tag_names
+  %p
     = bookmark_form.label :comments
     = bookmark_form.text_area :comments
   %p

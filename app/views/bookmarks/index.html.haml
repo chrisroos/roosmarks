@@ -8,3 +8,4 @@
     %li.bookmark
       .url= bookmark.url
       .title= bookmark.title
+      .tags= bookmark.tags.map(&:name).join(' ')
