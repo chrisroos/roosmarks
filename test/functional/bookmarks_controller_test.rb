@@ -2,7 +2,7 @@ require 'test_helper'
 
 class BookmarksControllerTest < ActionController::TestCase
   test 'should display all bookmarks' do
-    Bookmark.create!(url: "http://example.com", title: "Example.com")
+    create(:bookmark, url: "http://example.com", title: "Example.com")
 
     get :index
 

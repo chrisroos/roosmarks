@@ -1,13 +1,17 @@
 require 'test_helper'
 
 class BookmarkTest < ActiveSupport::TestCase
+  test "should be valid when build from the factory" do
+    assert build(:bookmark).valid?
+  end
+
   test "should be invalid without a URL" do
-    bookmark = Bookmark.new(url: nil)
+    bookmark = build(:bookmark, url: nil)
     refute bookmark.valid?
   end
 
   test "should be invalid without a title" do
-    bookmark = Bookmark.new(title: nil)
+    bookmark = build(:bookmark, title: nil)
     refute bookmark.valid?
   end
 end
