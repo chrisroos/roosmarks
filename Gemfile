@@ -15,3 +15,9 @@ end
 group :development do
   gem 'heroku'
 end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+end
