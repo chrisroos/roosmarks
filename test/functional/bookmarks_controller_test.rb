@@ -12,6 +12,17 @@ class BookmarksControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should link to the tags' do
+    tag = create(:tag, name: "tag-1")
+    create(:bookmark, tags: [tag])
+
+    get :index
+
+    assert_select '#bookmarks' do
+      assert_select "a[href=#{tag_path(tag)}]", text: "tag-1"
+    end
+  end
+
   test 'should display all fields used to add a new bookmark' do
     get :new
 

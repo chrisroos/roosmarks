@@ -8,4 +8,6 @@
     %li.bookmark
       .url= bookmark.url
       .title= bookmark.title
-      .tags= bookmark.tags.map(&:name).join(' ')
+      .tags
+        - bookmark.tags.each do |tag|
+          = link_to tag.name, tag
