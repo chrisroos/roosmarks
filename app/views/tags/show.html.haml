@@ -1,5 +1,9 @@
 %h1 Bookmarks tagged with #{@tag.name}
 
+= link_to "Edit", edit_tag_path(@tag)
+
+.description= @tag.description
+
 %ul#bookmarks
   - @bookmarks.each do |bookmark|
     %li.bookmark

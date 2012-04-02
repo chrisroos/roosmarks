@@ -10,4 +10,12 @@ class TagsTest < ActionDispatch::IntegrationTest
     assert_bookmark_visible url: "http://foo.com", title: "foo.com"
     assert_bookmark_visible url: "http://bar.com", title: "bar.com"
   end
+
+  test "Adding a description to a tag" do
+    given_a_user_bookmarks url: "http://foo.com", title: "foo.com", tags: "tag-1"
+
+    when_describing_a_tag tag: "tag-1", description: "tag-description"
+
+    assert_tag_attributes tag: "tag-1", description: "tag-description"
+  end
 end

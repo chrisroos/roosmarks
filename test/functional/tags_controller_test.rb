@@ -15,4 +15,20 @@ class TagsControllerTest < ActionController::TestCase
       assert_select '.bookmark .title', text: 'bookmark-without-tags', count: 0
     end
   end
+
+  test "should update the tag with the given description" do
+    tag = create(:tag, description: nil)
+
+    put :update, id: tag, tag: {description: "tag-description"}
+
+    assert_equal "tag-description", tag.reload.description
+  end
+
+  test "should redirect to the tag page after updating" do
+    tag = create(:tag)
+
+    put :update, id: tag
+
+    assert_redirected_to tag_path(tag)
+  end
 end

@@ -1,0 +1,8 @@
+%h1 Edit #{@tag.name}
+
+= form_for(@tag) do |tag_form|
+  %p
+    = tag_form.label :description
+    = tag_form.text_area :description
+  %p
+    = tag_form.submit 'Save'
