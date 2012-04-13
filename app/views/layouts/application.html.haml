@@ -5,5 +5,7 @@
     = stylesheet_link_tag    "application", :media => "all"
     = csrf_meta_tags
   %body
-    %a{:href => "javascript: document.location = 'http://chrisroos-bookmarks.heroku.com/bookmarks/new?url=' + document.location.href + '&amp;title=' + document.title;"} roosmark!
-    = yield
+    .container
+      %p
+        %a{:href => "javascript: document.location = 'http://chrisroos-bookmarks.heroku.com/bookmarks/new?url=' + document.location.href + '&amp;title=' + document.title;"} roosmark!
+      = yield
