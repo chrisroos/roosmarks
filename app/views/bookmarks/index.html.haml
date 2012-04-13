@@ -10,4 +10,4 @@
       .title= bookmark.title
       .tags
         - bookmark.tags.each do |tag|
-          = link_to tag.name, tag
+          = link_to tag.name, tag, class: "label label-info"
