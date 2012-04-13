@@ -4,7 +4,7 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    @bookmark = Bookmark.new
+    @bookmark = Bookmark.new(url: params[:url], title: params[:title])
   end
 
   def create

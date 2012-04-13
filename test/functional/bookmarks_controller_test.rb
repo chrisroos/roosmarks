@@ -35,6 +35,13 @@ class BookmarksControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should populate the url and title using the supplied parameters' do
+    get :new, url: 'http://example.com', title: 'example.com'
+
+    assert_select "input[name='bookmark[url]'][value='http://example.com']"
+    assert_select "input[name='bookmark[title]'][value='example.com']"
+  end
+
   test 'should allow a bookmark to be added' do
     post :create, bookmark: {url: 'http://example.com', title: 'Example.com', tag_names: 'tag-1 tag-2'}
 
