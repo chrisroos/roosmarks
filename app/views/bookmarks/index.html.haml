@@ -6,7 +6,7 @@
 %ul#bookmarks
   - @bookmarks.each do |bookmark|
     %li.bookmark
-      .url= bookmark.url
+      = link_to bookmark.url, bookmark.url, class: 'url'
       .title= bookmark.title
       .tags
         - bookmark.tags.each do |tag|

@@ -23,6 +23,14 @@ class BookmarksControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should link to the bookmark url' do
+    create(:bookmark, url: 'http://example.com')
+
+    get :index
+
+    assert_select "a.url[href='http://example.com']"
+  end
+
   test 'should display all fields used to add a new bookmark' do
     get :new
 
