@@ -5,9 +5,4 @@
 
 %ul#bookmarks
   - @bookmarks.each do |bookmark|
-    %li.bookmark
-      = link_to bookmark.title, bookmark.url, class: 'title'
-      .url= bookmark.url
-      .tags
-        - bookmark.tags.each do |tag|
-          = link_to tag.name, tag, class: "label label-info"
+    = render partial: 'bookmark', object: bookmark
