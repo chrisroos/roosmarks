@@ -7,5 +7,5 @@
   %body
     .container
       %p
-        %a{:href => "javascript: document.location = 'http://chrisroos-bookmarks.heroku.com/bookmarks/new?url=' + document.location.href + '&amp;title=' + document.title;"} roosmark!
+        %a{:href => "javascript: document.location = '#{new_bookmark_url}?url=' + document.location.href + '&title=' + document.title;"} roosmark!
       = yield
