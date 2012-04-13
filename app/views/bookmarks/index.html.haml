@@ -1,7 +1,7 @@
 %h1 Bookmarks
 
 %nav
-  = link_to "New bookmark", new_bookmark_path
+  = link_to "New bookmark", new_bookmark_path, class: 'btn'
 
 %ul#bookmarks
   - @bookmarks.each do |bookmark|

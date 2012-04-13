@@ -1,6 +1,6 @@
 %h1 Bookmarks tagged with #{@tag.name}
 
-= link_to "Edit", edit_tag_path(@tag)
+= link_to "Edit", edit_tag_path(@tag), class: 'btn'
 
 .description= @tag.description
 
