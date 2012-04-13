@@ -1,0 +1,8 @@
+ul#bookmarks {
+  margin-left: 0;
+}
+#bookmarks li {
+  list-style: none;
+  border-bottom: 0.1em solid;
+  padding: 0.5em 0;
+}
