@@ -12,8 +12,6 @@
 
 * Display acronyms differently?
 
-* Get asset compilation happening at deploy time.
-
 * Add to github
 
 * Useful error messages when bookmark addition fails (e.g. due to validation error)
