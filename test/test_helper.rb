@@ -11,4 +11,8 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   include FactoryGirl::Syntax::Methods
+
+  def login!
+    @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("#{USERNAME}:#{PASSWORD}")
+  end
 end

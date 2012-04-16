@@ -31,7 +31,15 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select "a[href='http://example.com']"
   end
 
+  test 'should prevent unauthenticated users from accessing the new bookmarks form' do
+    get :new
+
+    assert_response :unauthorized
+  end
+
   test 'should display all fields used to add a new bookmark' do
+    login!
+
     get :new
 
     assert_select 'form[action=/bookmarks][method=post]' do
@@ -44,13 +52,23 @@ class BookmarksControllerTest < ActionController::TestCase
   end
 
   test 'should populate the url and title using the supplied parameters' do
+    login!
+
     get :new, url: 'http://example.com', title: 'example.com'
 
     assert_select "input[name='bookmark[url]'][value='http://example.com']"
     assert_select "input[name='bookmark[title]'][value='example.com']"
   end
 
+  test 'should prevent unauthenticated users from creating new bookmarks' do
+    post :create, bookmark: {}
+
+    assert_response :unauthorized
+  end
+
   test 'should allow a bookmark to be added' do
+    login!
+
     post :create, bookmark: {url: 'http://example.com', title: 'Example.com', tag_names: 'tag-1 tag-2'}
 
     assert_equal 'http://example.com', Bookmark.last.url
@@ -59,6 +77,8 @@ class BookmarksControllerTest < ActionController::TestCase
   end
 
   test 'should redirect to the list of bookmarks after creation' do
+    login!
+
     post :create, bookmark: {url: 'http://example.com', title: 'Example.com'}
 
     assert_redirected_to bookmarks_path

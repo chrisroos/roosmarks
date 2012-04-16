@@ -16,9 +16,26 @@ class TagsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should prevent unauthenticated users from accessing the edit tag form' do
+    tag = create(:tag)
+
+    get :edit, id: tag
+
+    assert_response :unauthorized
+  end
+
+  test 'should prevent unauthenticated users from updating a tag' do
+    tag = create(:tag)
+
+    post :update, id: tag, tag: {}
+
+    assert_response :unauthorized
+  end
+
   test "should update the tag with the given description" do
     tag = create(:tag, description: nil)
 
+    login!
     put :update, id: tag, tag: {description: "tag-description"}
 
     assert_equal "tag-description", tag.reload.description
@@ -27,6 +44,7 @@ class TagsControllerTest < ActionController::TestCase
   test "should redirect to the tag page after updating" do
     tag = create(:tag)
 
+    login!
     put :update, id: tag
 
     assert_redirected_to tag_path(tag)

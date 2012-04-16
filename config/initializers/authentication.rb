@@ -1,0 +1,2 @@
+USERNAME = ENV['ROOSMARKS_USERNAME'] || 'username'
+PASSWORD = ENV['ROOSMARKS_PASSWORD'] || 'password'

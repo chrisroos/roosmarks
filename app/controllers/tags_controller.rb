@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  before_filter :authenticate, only: [:edit, :update]
+
   def show
     @tag = Tag.find(params[:id])
     @bookmarks = @tag.bookmarks

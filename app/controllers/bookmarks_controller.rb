@@ -1,4 +1,6 @@
 class BookmarksController < ApplicationController
+  before_filter :authenticate, only: [:new, :create]
+
   def index
     @bookmarks = Bookmark.all
   end

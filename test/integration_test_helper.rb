@@ -24,7 +24,12 @@ class ActionDispatch::IntegrationTest
     click_link tag_name
   end
 
+  def login!
+    page.driver.browser.basic_authorize USERNAME, PASSWORD
+  end
+
   def given_a_user_bookmarks(attributes)
+    login!
     visit "/"
     click_link "New bookmark"
     fill_in "Url", with: attributes[:url]
