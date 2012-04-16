@@ -1,17 +1,17 @@
 development:
   adapter: postgresql
-  database: bookmarks_development
+  database: roosmarks_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
   adapter: postgresql
-  database: bookmarks_test
+  database: roosmarks_test
 
 production:
   adapter: postgresql
-  database: bookmarks
+  database: roosmarks
 
 cucumber:
   <<: *test
