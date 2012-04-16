@@ -1,8 +1,9 @@
 %h1 Bookmarks tagged with #{@tag.name}
 
-= link_to "Edit", edit_tag_path(@tag), class: 'btn'
+- if @tag.description.present?
+  .description.well= @tag.description
 
-.description= @tag.description
+= link_to "Edit", edit_tag_path(@tag), class: 'btn'
 
 %ul#bookmarks
   - @bookmarks.each do |bookmark|
