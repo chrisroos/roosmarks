@@ -1,7 +1,40 @@
-I've got this idea that I can use a simple bookmarking service (like [delicious][] or [pinboard][]) as a more effective research tool than it is now.  I'm using this app to explore whether my thoughts make any sense, at all.
+# Roosmarks
 
-It's currently hosted on heroku at [chrisroos-bookmarks][]
+A self-hosted bookmarking service, similar(ish) to [delicious][], [pinboard][] and probably others.
+
+I'm going to use this project to explore some ideas I've got about how bookmarking services might be more useful to me.
+
+I currently have a version hosted on [Heroku][] at [roosmarks][].
+
+## Development
+
+### Pre-requisites
+
+* [Ruby][]
+* [Rubygems][] and [Bundler][]
+* [PostgreSQL][]
+
+### Getting started
+
+    $ bundle install
+    $ rake db:create:all
+    $ rake db:migrate
+    $ script/rails s # or
+    $ foreman start
+
+## Deploying to Heroku
+
+    $ heroku create --stack cedar
+    $ heroku config:add ROOSMARKS_USERNAME=your-username-here
+    $ heroku config:add ROOSMARKS_PASSWORD=your-password-here
+    $ git push heroku master
+    $ heroku run rake db:migrate
 
 [delicious]: http://delicious.com/
 [pinboard]: http://pinboard.in/
-[chrisroos-bookmarks]: http://chrisroos-bookmarks.heroku.com/
+[roosmarks]: http://roosmarks.herokuapp.com/
+[Ruby]: http://www.ruby-lang.org/
+[Rubygems]: http://rubyforge.org/projects/rubygems/
+[Bundler]: http://gembundler.com/
+[PostgreSQL]: http://www.postgresql.org/
+[Heroku]: http://www.heroku.com/
