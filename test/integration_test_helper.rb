@@ -47,7 +47,7 @@ class ActionDispatch::IntegrationTest
     visit tag_path(tag)
     click_link "Edit"
     fill_in "Description", with: options[:description]
-    click_button "Save"
+    click_button "Update tag"
   end
 
   def assert_bookmark_visible(attributes)

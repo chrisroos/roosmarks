@@ -1,8 +1,11 @@
 %h1 Edit #{@tag.name}
 
-= form_for(@tag) do |tag_form|
-  %p
-    = tag_form.label :description
-    = tag_form.text_area :description
-  %p
-    = tag_form.submit 'Save'
+= form_for(@tag, html: {class: 'edit_tag form-horizontal'}) do |tag_form|
+  %fieldset
+    %legend Details of the tag
+    .control-group
+      = tag_form.label :description, class: 'control-label'
+      .controls
+        = tag_form.text_area :description, rows: 5, class: 'input-xlarge'
+    .form-actions
+      = tag_form.submit 'Update tag', class: 'btn-primary'
