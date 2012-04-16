@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Bookmarks::Application.load_tasks
+Roosmarks::Application.load_tasks
