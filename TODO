@@ -13,5 +13,3 @@
 * Display acronyms differently?
 
 * Useful error messages when bookmark addition fails (e.g. due to validation error)
-
-* Add to Travis-CI
