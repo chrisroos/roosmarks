@@ -19,6 +19,14 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select '.bookmark .title', text: "Example.com"
   end
 
+  test 'should display the domain of the bookmarked page' do
+    create(:bookmark, url: 'http://www.example.com/foo/bar/baz')
+
+    get :index
+
+    assert_select '.bookmark .domain', text: 'www.example.com'
+  end
+
   test 'should display the bookmark comments' do
     create(:bookmark, comments: 'bookmark-comments')
 

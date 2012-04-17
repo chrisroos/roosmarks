@@ -6,3 +6,6 @@ ul#bookmarks {
   border-bottom: 0.1em solid;
   padding: 0.5em 0;
 }
+#bookmarks .domain {
+  color: #777;
+}
