@@ -2,14 +2,36 @@ require 'test_helper'
 
 class BookmarksControllerTest < ActionController::TestCase
   test 'should display all bookmarks' do
-    create(:bookmark, url: "http://example.com", title: "Example.com")
+    create(:bookmark)
+    create(:bookmark)
 
     get :index
 
-    assert_select '#bookmarks' do
-      assert_select '.bookmark .url', text: "http://example.com"
-      assert_select '.bookmark .title', text: "Example.com"
-    end
+    assert_select '#bookmarks .bookmark', count: 2
+  end
+
+  test 'should display the bookmark title' do
+    create(:bookmark, title: 'Example.com')
+
+    get :index
+
+    assert_select '.bookmark .title', text: "Example.com"
+  end
+
+  test 'should display the bookmark url' do
+    create(:bookmark, url: 'http://example.com')
+
+    get :index
+
+    assert_select '.bookmark .url', text: "http://example.com"
+  end
+
+  test 'should link to the bookmarked url' do
+    create(:bookmark, url: 'http://example.com')
+
+    get :index
+
+    assert_select "a[href='http://example.com']"
   end
 
   test 'should link to the tags' do
@@ -21,14 +43,6 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select '#bookmarks' do
       assert_select "a[href=#{tag_path(tag)}]", text: "tag-1"
     end
-  end
-
-  test 'should link to the bookmarked url' do
-    create(:bookmark, url: 'http://example.com')
-
-    get :index
-
-    assert_select "a[href='http://example.com']"
   end
 
   test 'should prevent unauthenticated users from accessing the new bookmarks form' do
