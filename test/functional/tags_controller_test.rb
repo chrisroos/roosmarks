@@ -15,6 +15,17 @@ class TagsControllerTest < ActionController::TestCase
       assert_select '.bookmark .title', text: 'bookmark-without-tags', count: 0
     end
   end
+  
+  test 'should display bookmarks in reverse chronological order' do
+    tag = create(:tag)
+    create(:bookmark, tags: [tag], title: 'older-bookmark', created_at: 1.month.ago)
+    create(:bookmark, tags: [tag], title: 'newer-bookmark', created_at: 1.day.ago)
+
+    get :show, id: tag
+
+    assert_select '#bookmarks .bookmark:first-child .title', text: 'newer-bookmark'
+    assert_select '#bookmarks .bookmark:last-child .title', text: 'older-bookmark'
+  end
 
   test 'should prevent unauthenticated users from accessing the edit tag form' do
     tag = create(:tag)

@@ -1,13 +1,14 @@
 require 'test_helper'
 
 class BookmarksControllerTest < ActionController::TestCase
-  test 'should display all bookmarks' do
-    create(:bookmark)
-    create(:bookmark)
+  test 'should display bookmarks in reverse chronological order' do
+    create(:bookmark, title: 'older-bookmark', created_at: 1.month.ago)
+    create(:bookmark, title: 'newer-bookmark', created_at: 1.day.ago)
 
     get :index
 
-    assert_select '#bookmarks .bookmark', count: 2
+    assert_select '#bookmarks .bookmark:first-child .title', text: 'newer-bookmark'
+    assert_select '#bookmarks .bookmark:last-child .title', text: 'older-bookmark'
   end
 
   test 'should display the bookmark title' do

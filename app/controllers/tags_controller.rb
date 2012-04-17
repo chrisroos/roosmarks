@@ -3,7 +3,7 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    @bookmarks = @tag.bookmarks
+    @bookmarks = @tag.bookmarks.order('created_at DESC')
   end
 
   def edit
