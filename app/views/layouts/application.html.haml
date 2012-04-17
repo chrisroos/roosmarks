@@ -5,7 +5,14 @@
     = stylesheet_link_tag    "application", :media => "all"
     = csrf_meta_tags
   %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to 'Roosmarks', '/', class: 'brand'
+          %ul.nav
+            %li
+              = link_to 'About', 'https://github.com/chrisroos/roosmarks/#readme'
+            %li
+              %a{:href => "javascript: document.location = '#{new_bookmark_url}?url=' + document.location.href + '&title=' + document.title;"} roosmark!
     .container
-      %p
-        %a{:href => "javascript: document.location = '#{new_bookmark_url}?url=' + document.location.href + '&title=' + document.title;"} roosmark!
       = yield
