@@ -1,7 +1,5 @@
 * Display the date of the roosmark
 
-* Display roosmarks in reverse chronological order
-
 * Prettify
 
 * Multiple comments per bookmark
@@ -17,5 +15,3 @@
 * Make the 'new bookmark' form appear in a popup when using the roosmark! bookmarklet
 
 * Allow some kind of markup in bookmark descriptions.  Markdown is probably good enough.
-
-* Display the descriptions somewhere on the site.  At the moment, they disappear into the ether.
