@@ -13,5 +13,3 @@
 * Useful error messages when bookmark addition fails (e.g. due to validation error)
 
 * Make the 'new bookmark' form appear in a popup when using the roosmark! bookmarklet
-
-* Allow some kind of markup in bookmark descriptions.  Markdown is probably good enough.
