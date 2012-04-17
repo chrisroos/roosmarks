@@ -110,6 +110,7 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
+    redcarpet (2.1.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rubyzip (0.9.6.1)
@@ -171,6 +172,7 @@ DEPENDENCIES
   launchy
   pg
   rails (= 3.2.2)
+  redcarpet
   sass-rails (~> 3.2.3)
   taps
   thin

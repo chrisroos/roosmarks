@@ -1,6 +1,6 @@
 %li.bookmark
   = link_to bookmark.title, bookmark.url, class: 'title'
-  .comments= bookmark.comments
+  .comments= markdown_to_html(bookmark.comments)
   .tags
     - bookmark.tags.each do |tag|
       = link_to tag.name, tag, class: "label label-info"

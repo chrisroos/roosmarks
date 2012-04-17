@@ -27,6 +27,14 @@ class TagsControllerTest < ActionController::TestCase
     assert_select '#bookmarks .bookmark:last-child .title', text: 'older-bookmark'
   end
 
+  test 'should automatically link to URLs in the description' do
+    tag = create(:tag, description: 'http://example.com')
+
+    get :show, id: tag
+
+    assert_select ".description a[href=http://example.com]"
+  end
+
   test 'should prevent unauthenticated users from accessing the edit tag form' do
     tag = create(:tag)
 

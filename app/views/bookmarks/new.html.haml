@@ -20,5 +20,6 @@
       = bookmark_form.label :comments, class: 'control-label'
       .controls
         = bookmark_form.text_area :comments, rows: 5, class: 'input-xlarge'
+        .help-block Markdown is supported
     .form-actions
       = bookmark_form.submit 'Create bookmark', class: 'btn-primary'

@@ -16,3 +16,9 @@ class ActiveSupport::TestCase
     @request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("#{USERNAME}:#{PASSWORD}")
   end
 end
+
+class ActionView::TestCase
+  def assert_select_in_html(text, *args, &block)
+    assert_select HTML::Document.new(text).root, *args, &block
+  end
+end

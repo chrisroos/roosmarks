@@ -27,6 +27,14 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select '.bookmark .comments', text: "bookmark-comments"
   end
 
+  test 'should automatically link to URLs in comments' do
+    create(:bookmark, comments: 'http://example.com')
+
+    get :index
+
+    assert_select ".bookmark .comments a[href=http://example.com]"
+  end
+
   test 'should link to the bookmarked url' do
     create(:bookmark, url: 'http://example.com')
 
