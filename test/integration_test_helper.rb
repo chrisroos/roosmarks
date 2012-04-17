@@ -51,7 +51,7 @@ class ActionDispatch::IntegrationTest
   end
 
   def assert_bookmark_visible(attributes)
-    assert page.has_css?('#bookmarks .bookmark .url', text: attributes[:url])
+    assert page.has_css?("#bookmarks .bookmark a[href='#{attributes[:url]}']")
     assert page.has_css?('#bookmarks .bookmark .title', text: attributes[:title])
     (attributes[:tags] || '').split(' ').each do |tag|
       assert page.has_css?('#bookmarks .bookmark .tags', text: tag)

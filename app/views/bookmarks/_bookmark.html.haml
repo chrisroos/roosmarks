@@ -1,6 +1,6 @@
 %li.bookmark
   = link_to bookmark.title, bookmark.url, class: 'title'
-  .url= bookmark.url
+  .comments= bookmark.comments
   .tags
     - bookmark.tags.each do |tag|
       = link_to tag.name, tag, class: "label label-info"

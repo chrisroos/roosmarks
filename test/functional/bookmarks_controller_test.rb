@@ -18,12 +18,12 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select '.bookmark .title', text: "Example.com"
   end
 
-  test 'should display the bookmark url' do
-    create(:bookmark, url: 'http://example.com')
+  test 'should display the bookmark comments' do
+    create(:bookmark, comments: 'bookmark-comments')
 
     get :index
 
-    assert_select '.bookmark .url', text: "http://example.com"
+    assert_select '.bookmark .comments', text: "bookmark-comments"
   end
 
   test 'should link to the bookmarked url' do
