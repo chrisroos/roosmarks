@@ -13,6 +13,6 @@
             %li
               = link_to 'About', 'https://github.com/chrisroos/roosmarks/#readme'
             %li
-              %a{:href => "javascript: document.location = '#{new_bookmark_url}?url=' + document.location.href + '&title=' + document.title;"} roosmark!
+              %a{:href => "javascript: var newBookmarkUrl = '#{new_bookmark_url}?url=' + document.location.href + '&title=' + document.title; window.open(newBookmarkUrl, 'roosmarklet', 'resizable=yes,scrollbars=yes,status=yes,height=600,width=500')"} roosmark!
     .container
       = yield
