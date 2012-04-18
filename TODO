@@ -8,7 +8,7 @@
 
 * Display acronyms differently?
 
-* Useful error messages when bookmark addition fails (e.g. due to validation error)
+* Useful error messages when bookmark addition fails (e.g. due to validation error) - see the wip-display-validation-errors branch
 
 * Close the bookmarklet popup window after successfully adding a bookmark.
 
