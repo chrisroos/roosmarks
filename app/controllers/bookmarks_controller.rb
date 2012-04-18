@@ -15,7 +15,11 @@ class BookmarksController < ApplicationController
     tags = tag_names.collect do |tag_name|
       Tag.find_or_create_by_name(tag_name)
     end
-    Bookmark.create! params[:bookmark].merge(tags: tags)
-    redirect_to bookmarks_path
+    @bookmark = Bookmark.new(params[:bookmark].merge(tags: tags))
+    if @bookmark.save
+      redirect_to bookmarks_path
+    else
+      render :new
+    end
   end
 end
