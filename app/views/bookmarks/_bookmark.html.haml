@@ -1,11 +1,14 @@
 %li.bookmark
-  = link_to bookmark.title, bookmark.url, class: 'title'
-  \-
-  %span.domain= bookmark.domain
-  .comments= markdown_to_html(bookmark.comments)
-  .tags
-    - bookmark.tags.each do |tag|
-      %a{:class => 'label label-info', :href => tag_path(tag)}<
-        = tag.name
-        - if tag.description.present?
-          %i.icon-comment.icon-white{title: "This tag has a description"}
+  .well
+    %p
+      = link_to bookmark.title, bookmark.url, class: 'title'
+      \-
+      %span.domain= bookmark.domain
+    .comments
+      = markdown_to_html(bookmark.comments)
+    .tags
+      - bookmark.tags.each do |tag|
+        %a{:class => 'label label-info', :href => tag_path(tag)}<
+          = tag.name
+          - if tag.description.present?
+            %i.icon-comment.icon-white{title: "This tag has a description"}

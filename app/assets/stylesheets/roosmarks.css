@@ -6,9 +6,14 @@ ul#bookmarks {
 }
 #bookmarks li {
   list-style: none;
-  border-bottom: 0.1em solid;
   padding: 0.5em 0;
 }
-#bookmarks .domain {
-  color: #777;
+.bookmark .title {
+  font-size: 1.2em;
+}
+.bookmark .domain {
+  color: #298A08;
+}
+.bookmark .comments {
+  color: #6E6E6E;
 }
