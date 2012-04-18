@@ -1,8 +1,5 @@
 %h1 Bookmarks
 
-%nav
-  = link_to "New bookmark", new_bookmark_path, class: 'btn'
-
 %ul#bookmarks
   - @bookmarks.each do |bookmark|
     = render partial: 'bookmark', object: bookmark
