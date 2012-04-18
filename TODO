@@ -13,3 +13,5 @@
 * Useful error messages when bookmark addition fails (e.g. due to validation error)
 
 * Close the bookmarklet popup window after successfully adding a bookmark.
+
+* Add Travis-CI build status to CI
