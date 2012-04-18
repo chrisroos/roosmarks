@@ -12,6 +12,7 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
 
 * [Ruby][]
 * [Rubygems][] and [Bundler][]
+* [libxml2][] and [libxslt][] (for Nokogiri)
 * [PostgreSQL][]
 
 ### Getting started
@@ -38,3 +39,5 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
 [Bundler]: http://gembundler.com/
 [PostgreSQL]: http://www.postgresql.org/
 [Heroku]: http://www.heroku.com/
+[libxml2]: http://xmlsoft.org/
+[libxslt]: http://xmlsoft.org/xslt/
