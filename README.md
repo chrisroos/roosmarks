@@ -14,7 +14,7 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
 * [Rubygems][] and [Bundler][]
 * [libxml2][] and [libxslt][] (for [Nokogiri][])
 * [sqlite3][] development headers (for [Taps][])
-* [PostgreSQL][]
+* [PostgreSQL][] (I've tested successfully with 9.1 on Mac and FreeBSD)
 * [NodeJS][] (for [ExecJS][] on FreeBSD)
 
 ### Getting started
@@ -23,6 +23,7 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
     $ rake db:create:all
     $ rake db:migrate
     $ script/rails s # or
+    $ echo RACK_ENV=development > .env
     $ foreman start
 
 ## Deploying to Heroku
@@ -37,10 +38,14 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
 
 I had to jump through some hoops to get this running on FreeBSD 8.2:
 
+    # Set PACKAGESITE to point to FreeBSD 8 stable packages so that we can get postgresql 9.1
+    # (The latest postgresql package for my FreeBSD 8.2 release is 9.0, which caused me problems)
+    $ setenv PACKAGESITE ftp://ftp.freebsd.org/pub/FreeBSD/ports/amd64/packages-8-stable/Latest/
+
     # Installing libxml2, libxslt, postgresql and node
     $ pkg_add -r libxml2
     $ pkg_add -r libxslt
-    $ pkg_add -r postgresql90-server
+    $ pkg_add -r postgresql91-server
     $ pkg_add -r node
 
     # Installing Sqlite3
