@@ -12,8 +12,10 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
 
 * [Ruby][]
 * [Rubygems][] and [Bundler][]
-* [libxml2][] and [libxslt][] (for Nokogiri)
+* [libxml2][] and [libxslt][] (for [Nokogiri][])
+* [sqlite3][] development headers (for [Taps][])
 * [PostgreSQL][]
+* [NodeJS][] (for [ExecJS][] on FreeBSD)
 
 ### Getting started
 
@@ -31,6 +33,22 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
     $ git push heroku master
     $ heroku run rake db:migrate
 
+## FreeBSD specific installation notes
+
+I had to jump through some hoops to get this running on FreeBSD 8.2:
+
+    # Installing libxml2, libxslt, postgresql and node
+    $ pkg_add -r libxml2
+    $ pkg_add -r libxslt
+    $ pkg_add -r postgresql90-server
+    $ pkg_add -r node
+
+    # Installing Sqlite3
+    # NOTE. The sqlite3 package contains the necessary development headers
+    # NOTE. You have to pass the --with-sqlite3-dir compile flag to ensure the gem is installed correctly
+    $ pkg_add -r sqlite3
+    $ bundle config build.sqlite3 --with-sqlite3-dir=/usr/local/
+
 [delicious]: http://delicious.com/
 [pinboard]: http://pinboard.in/
 [roosmarks]: http://roosmarks.herokuapp.com/
@@ -41,3 +59,8 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
 [Heroku]: http://www.heroku.com/
 [libxml2]: http://xmlsoft.org/
 [libxslt]: http://xmlsoft.org/xslt/
+[sqlite3]: http://www.sqlite.org/
+[Nokogiri]: http://nokogiri.org/
+[Taps]: http://rubygems.org/gems/taps
+[ExecJS]: https://github.com/sstephenson/execjs
+[NodeJS]: http://nodejs.org/
