@@ -2,9 +2,9 @@
 
 * Multiple comments per bookmark
 
-* Tag slugs
+* Tag slugs (e.g. /tags/funnies, rather than /tags/999)
 
-* Ad-hoc notes against tags
+* Ad-hoc notes against tags (similar to pinboard's idea of notes)
 
 * Display acronyms differently?
 
@@ -13,3 +13,7 @@
 * Close the bookmarklet popup window after successfully adding a bookmark.
 
 * Add Travis-CI build status to CI
+
+* Allow singular 'bookmarks' to be displayed.  This might become more relevant if/when you can add multiple comments to a bookmark.
+
+* Bookmarks should be editable.
