@@ -7,6 +7,6 @@ class TwitterBootstrapFormBuilder < ActionView::Helpers::FormBuilder
     control_group_class = ['control-group']
     control_group_class += ['required'] if options[:required]
     control_group_class += ['error'] if @object.errors[method].any?
-    output = @template.content_tag(:div, class: control_group_class.join(' '), &block)
+    @template.content_tag(:div, class: control_group_class.join(' '), &block)
   end
 end
