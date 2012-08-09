@@ -4,8 +4,6 @@
 
 * Allow bookmarks to be deleted
 
-* Don't allow multiple bookmarks to be created for the same URL
-
 * Display some pretty stats about the number of bookmarks per domain.  Maybe I could have /domain/imgur.com, for example?
 
 * Add atom feed for main page

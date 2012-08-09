@@ -15,6 +15,12 @@ class BookmarkTest < ActiveSupport::TestCase
     refute bookmark.valid?
   end
 
+  test "should be invalid if the url has already been bookmarked" do
+    bookmark_1 = create(:bookmark)
+    bookmark_2 = build(:bookmark, url: bookmark_1.url)
+    refute bookmark_2.save
+  end
+
   test "should return the domain of the bookmark URL" do
     bookmark = build(:bookmark, url: "http://www.example.com/foo/bar/baz")
     assert_equal 'www.example.com', bookmark.domain

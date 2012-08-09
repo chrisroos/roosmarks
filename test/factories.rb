@@ -1,6 +1,10 @@
 FactoryGirl.define do
+  sequence :url do |n|
+    "http://example.com/#{n}"
+  end
+
   factory :bookmark do
-    url   'http://example.com'
+    url
     title 'example.com'
   end
 
