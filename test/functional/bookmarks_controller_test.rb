@@ -93,6 +93,17 @@ class BookmarksControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should add a class to the required control-groups' do
+    login!
+
+    get :new
+
+    assert_select 'form[action=/bookmarks][method=post]' do
+      assert_select ".required input[name='bookmark[url]']"
+      assert_select ".required input[name='bookmark[title]']"
+    end
+  end
+
   test 'should populate the url and title using the supplied parameters' do
     login!
 

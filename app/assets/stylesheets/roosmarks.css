@@ -17,3 +17,9 @@ ul#bookmarks {
 .bookmark .comments {
   color: #6E6E6E;
 }
+.required label {
+  font-weight: bold;
+}
+.required input {
+  background-color: #FFC;
+}
