@@ -9,13 +9,15 @@
       = bookmark_form.label :url, class: 'control-label'
       .controls
         = bookmark_form.text_field :url, class: 'input-xlarge', required: true
-        %strong.help-inline Required
+        -if @bookmark.errors[:url].any?
+          .help-inline Please enter a unique URL
 
     = bookmark_form.control_group :title do
       = bookmark_form.label :title, class: 'control-label'
       .controls
         = bookmark_form.text_field :title, class: 'input-xlarge', required: true
-        %strong.help-inline Required
+        -if @bookmark.errors[:title].any?
+          .help-inline Please enter a title
 
     .control-group
       = bookmark_form.label :tag_names, 'Tags', class: 'control-label'

@@ -124,7 +124,9 @@ class BookmarksControllerTest < ActionController::TestCase
     post :create, bookmark: {}
 
     assert_select '.error #bookmark_url'
+    assert_select '.error', text: /Please enter a unique URL/
     assert_select '.error #bookmark_title'
+    assert_select '.error', text: /Please enter a title/
   end
 
   test 'should redirect to the list of bookmarks after creation' do
