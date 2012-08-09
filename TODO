@@ -1,3 +1,17 @@
+* Add atom feed for main page
+
+* Add atom feed for tag pages
+
+* Ensure tag pages aren't polluting google search results
+
+* Add searching of bookmarks
+
+* Create a simple chrome extension that'll tell me whether I've previously bookmarked the page I'm looking at
+
+* Investigate the heroku email about migrating the database
+
+* Add autocomplete for tag suggestions
+
 * Display the date of the roosmark
 
 * Multiple comments per bookmark
