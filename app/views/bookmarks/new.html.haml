@@ -6,12 +6,12 @@
     = bookmark_form.control_group :url do
       = bookmark_form.label :url, class: 'control-label'
       .controls
-        = bookmark_form.text_field :url, class: 'input-xlarge'
+        = bookmark_form.text_field :url, class: 'input-xlarge', required: true
         %strong.help-inline Required
     = bookmark_form.control_group :title do
       = bookmark_form.label :title, class: 'control-label'
       .controls
-        = bookmark_form.text_field :title, class: 'input-xlarge'
+        = bookmark_form.text_field :title, class: 'input-xlarge', required: true
         %strong.help-inline Required
     .control-group
       = bookmark_form.label :tag_names, 'Tags', class: 'control-label'

@@ -82,6 +82,17 @@ class BookmarksControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should add the required atttribute to the required fields' do
+    login!
+
+    get :new
+
+    assert_select 'form[action=/bookmarks][method=post]' do
+      assert_select "input[name='bookmark[url]'][required='required']"
+      assert_select "input[name='bookmark[title]'][required='required']"
+    end
+  end
+
   test 'should populate the url and title using the supplied parameters' do
     login!
 
