@@ -1,4 +1,4 @@
-# Roosmarks
+# Roosmarks [![Build Status](https://secure.travis-ci.org/chrisroos/roosmarks.png?branch=master)](http://travis-ci.org/chrisroos/roosmarks)
 
 A self-hosted bookmarking service, similar(ish) to [delicious][], [pinboard][] and probably others.
 
