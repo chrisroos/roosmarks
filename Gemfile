@@ -18,6 +18,7 @@ group :development do
   gem 'heroku'
   gem 'taps'
   gem 'foreman'
+  gem 'sqlite3'
 end
 
 group :test do
