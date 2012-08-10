@@ -10,7 +10,7 @@
 
 * Add searching of bookmarks
 
-* Create a simple chrome extension that'll tell me whether I've previously bookmarked the page I'm looking at
+* Create a simple chrome extension that'll tell me whether I've previously bookmarked the page I'm looking at - I think this'll be easier when I have a page per bookmark (as I should then be able to do HEAD /bookmarks/<identifier> to determine whether I've bookmarked something or not)
 
 * Add autocomplete for tag suggestions
 
@@ -32,8 +32,13 @@
 
 * Is there a way of automatically associating a bookmark with another URL/bookmark. I'm thinking about all the bookmarks I've found because of Gina's google plus post.  Maybe just a referrer/via/hat-tip type field is good enough?
 
-* What does Brakeman say about roosmarks?
-
 * Do I need to update the Heroku installation instructions now that Cedar is the default stack and shared-database has been deprecated in favour of pg:dev?
 
 * Add categories/tags to the atom feed
+
+* Can/Should I display the favicon next to bookmarked sites?
+  - I can do this very very naively with something like `= image_tag "http://#{bookmark.domain}/favicon.ico"`.  Ignoring hotlinking concerns, I'm not even sure that I should do it from a visual point of view.
+
+* Can/Should I display images inline?
+
+* Can/Should I display videos inline?
