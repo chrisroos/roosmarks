@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BookmarkTest < ActiveSupport::TestCase
+class TagTest < ActiveSupport::TestCase
   test "should be valid when built from the factory" do
     assert build(:tag).valid?
   end
