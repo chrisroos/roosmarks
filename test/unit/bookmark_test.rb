@@ -21,6 +21,35 @@ class BookmarkTest < ActiveSupport::TestCase
     refute bookmark_2.save
   end
 
+  test "should allow url to be mass assigned" do
+    bookmark = Bookmark.new(url: 'http://example.com')
+    assert_equal 'http://example.com', bookmark.url
+  end
+
+  test "should allow title to be mass assigned" do
+    bookmark = Bookmark.new(title: 'my-title')
+    assert_equal 'my-title', bookmark.title
+  end
+
+  test "should allow comments to be mass assigned" do
+    bookmark = Bookmark.new(comments: 'my-comments')
+    assert_equal 'my-comments', bookmark.comments
+  end
+
+  test "should allow tags to be mass assigned" do
+    tag = build(:tag)
+    bookmark = Bookmark.new(tags: [tag])
+    assert_equal [tag], bookmark.tags
+  end
+
+  test "should not allow created_at to be mass assigned" do
+    assert_raise(ActiveModel::MassAssignmentSecurity::Error) { Bookmark.new(created_at: Time.now) }
+  end
+
+  test "should not allow updated_at to be mass assigned" do
+    assert_raise(ActiveModel::MassAssignmentSecurity::Error) { Bookmark.new(updated_at: Time.now) }
+  end
+
   test "should return the domain of the bookmark URL" do
     bookmark = build(:bookmark, url: "http://www.example.com/foo/bar/baz")
     assert_equal 'www.example.com', bookmark.domain
