@@ -10,6 +10,12 @@ class TagTest < ActiveSupport::TestCase
     refute tag.valid?
   end
 
+  test "should be invalid if a tag with the same name already exists" do
+    tag_1 = create(:tag)
+    tag_2 = build(:tag, name: tag_1.name)
+    refute tag_2.save
+  end
+
   test "should allow name to be mass assigned" do
     tag = Tag.new(name: 'my-name')
     assert_equal 'my-name', tag.name
