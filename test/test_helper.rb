@@ -22,3 +22,15 @@ class ActionView::TestCase
     assert_select HTML::Document.new(text).root, *args, &block
   end
 end
+
+class ActionController::TestCase
+  def assert_bookmark_atom_feed_entry(bookmark)
+    assert_select 'feed entry' do
+      assert_select 'published', text: bookmark.created_at.xmlschema
+      assert_select 'updated', text: bookmark.updated_at.xmlschema
+      assert_select 'link[href=?]', bookmark.url
+      assert_select 'title', text: bookmark.title
+      assert_select 'content', text: /#{bookmark.comments}/
+    end
+  end
+end

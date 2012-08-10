@@ -62,6 +62,33 @@ class BookmarksControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should link to the atom feed' do
+    get :index
+
+    assert_select "link[href=#{bookmarks_url(format: 'atom')}][type='application/atom+xml'][rel='alternate']"
+  end
+
+  test 'should render atom feed of all bookmarks' do
+    oldest_bookmark = create(:bookmark, title: 'bookmark-1', comments: 'comments-about-bookmark-1', created_at: 2.days.ago, updated_at: 2.days.ago)
+    newest_bookmark = create(:bookmark, title: 'bookmark-2', comments: 'comments-about-bookmark-2', created_at: 1.day.ago, updated_at: 1.day.ago)
+
+    get :index, format: 'atom'
+
+    assert_select 'feed title', text: 'All bookmarks'
+    assert_select 'feed updated', text: newest_bookmark.updated_at.xmlschema
+    assert_select 'feed author name', text: USERNAME
+    assert_bookmark_atom_feed_entry(newest_bookmark)
+    assert_bookmark_atom_feed_entry(oldest_bookmark)
+  end
+
+  test 'should use the title as the atom feed entry if the comments are empty' do
+    create(:bookmark, title: 'bookmark-1', comments: '')
+
+    get :index, format: 'atom'
+
+    assert_select 'content', text: 'bookmark-1'
+  end
+
   test 'should prevent unauthenticated users from accessing the new bookmarks form' do
     get :new
 

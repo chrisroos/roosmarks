@@ -1,5 +1,8 @@
 %h1 Bookmarks
 
+- content_for :atom_feed_link do
+  %link{rel: 'alternate', type: 'application/atom+xml', href: bookmarks_url(format: 'atom'), title: 'Atom feed of all bookmarks'}
+
 %ul#bookmarks
   - @bookmarks.each do |bookmark|
     = render partial: 'bookmark', object: bookmark

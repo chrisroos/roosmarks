@@ -3,6 +3,10 @@ class BookmarksController < ApplicationController
 
   def index
     @bookmarks = Bookmark.order('created_at DESC')
+    respond_to do |format|
+      format.html
+      format.atom
+    end
   end
 
   def new

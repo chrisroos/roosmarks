@@ -4,6 +4,7 @@
     %title Bookmarks
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
+    = yield :atom_feed_link
     = csrf_meta_tags
   %body
     .navbar.navbar-fixed-top
