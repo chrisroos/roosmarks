@@ -80,7 +80,7 @@ class BookmarksControllerTest < ActionController::TestCase
 
     get :index, format: 'atom'
 
-    assert_select 'feed title', text: 'All bookmarks'
+    assert_select 'feed title', text: 'All bookmarks | Roosmarks'
     assert_select 'feed updated', text: newest_bookmark.updated_at.xmlschema
     assert_select 'feed author name', text: USERNAME
     assert_bookmark_atom_feed_entry(newest_bookmark)

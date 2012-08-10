@@ -1,5 +1,5 @@
 atom_feed do |feed|
-  feed.title "All bookmarks"
+  feed.title "All bookmarks | Roosmarks"
   feed.updated @bookmarks.last.created_at
   feed.author do |author|
     author.name USERNAME
