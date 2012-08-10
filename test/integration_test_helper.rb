@@ -29,6 +29,9 @@ class ActionDispatch::IntegrationTest
   end
 
   def given_a_user_bookmarks(attributes)
+    unknown_keys = attributes.keys - [:url, :title, :tags]
+    raise "Unknown keys: #{unknown_keys}" if unknown_keys.any?
+
     login!
     visit "/"
     click_link "New bookmark"
@@ -42,15 +45,21 @@ class ActionDispatch::IntegrationTest
     visit_tag_page(tag_name)
   end
 
-  def when_describing_a_tag(options)
-    tag = Tag.find_by_name!(options[:tag])
+  def when_describing_a_tag(attributes)
+    unknown_keys = attributes.keys - [:tag, :description]
+    raise "Unknown keys: #{unknown_keys}" if unknown_keys.any?
+
+    tag = Tag.find_by_name!(attributes[:tag])
     visit tag_path(tag)
     click_link "Edit"
-    fill_in "Description", with: options[:description]
+    fill_in "Description", with: attributes[:description]
     click_button "Update tag"
   end
 
   def assert_bookmark_visible(attributes)
+    unknown_keys = attributes.keys - [:url, :title, :tags]
+    raise "Unknown keys: #{unknown_keys}" if unknown_keys.any?
+
     assert page.has_css?("#bookmarks .bookmark a[href='#{attributes[:url]}']")
     assert page.has_css?('#bookmarks .bookmark .title', text: attributes[:title])
     (attributes[:tags] || '').split(' ').each do |tag|
@@ -59,6 +68,9 @@ class ActionDispatch::IntegrationTest
   end
 
   def assert_tag_attributes(attributes)
+    unknown_keys = attributes.keys - [:tag, :description]
+    raise "Unknown keys: #{unknown_keys}" if unknown_keys.any?
+
     visit_tag_page(attributes[:tag])
     assert page.has_css? ".description", text: attributes[:description]
   end
