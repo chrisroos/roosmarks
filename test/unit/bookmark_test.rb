@@ -42,6 +42,11 @@ class BookmarkTest < ActiveSupport::TestCase
     assert_equal [tag], bookmark.tags
   end
 
+  test "should allow tag_names to be mass assigned" do
+    bookmark = Bookmark.new(tag_names: 'tag-1 tag-2')
+    assert_equal 'tag-1 tag-2', bookmark.tag_names
+  end
+
   test "should not allow created_at to be mass assigned" do
     assert_raise(ActiveModel::MassAssignmentSecurity::Error) { Bookmark.new(created_at: Time.now) }
   end

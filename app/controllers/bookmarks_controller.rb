@@ -19,7 +19,7 @@ class BookmarksController < ApplicationController
     tags = tag_names.collect do |tag_name|
       Tag.find_or_create_by_name(tag_name)
     end
-    @bookmark = Bookmark.new(params[:bookmark].merge(tags: tags))
+    @bookmark = Bookmark.new(params[:bookmark].merge(tags: tags, tag_names: tag_names.join(' ')))
     if @bookmark.save
       redirect_to bookmarks_path
     else

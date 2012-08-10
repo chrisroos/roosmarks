@@ -181,6 +181,17 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select '.error', text: /Please enter a title/
   end
 
+  test 'should populate the form with the bookmark attributes if creation fails' do
+    login!
+
+    post :create, bookmark: {url: 'http://example.com', title: '', tag_names: 'tag1 tag2', comments: 'my-comments'}
+
+    assert_select "input[name='bookmark[url]'][value='http://example.com']"
+    assert_select "input[name='bookmark[title]'][value='']"
+    assert_select "input[name='bookmark[tag_names]'][value='tag1 tag2']"
+    assert_select "textarea[name='bookmark[comments]']", text: 'my-comments'
+  end
+
   test 'should redirect to the list of bookmarks after creation' do
     login!
 
