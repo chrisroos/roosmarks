@@ -11,10 +11,10 @@ class TagsControllerTest < ActionController::TestCase
   end
 
   test "should display all bookmarks for the tag" do
-    tag = create(:tag)
-    bookmark_1 = create(:bookmark, tags: [tag], title: 'bookmark-1')
-    bookmark_2 = create(:bookmark, tags: [tag], title: 'bookmark-2')
+    bookmark_1 = create(:bookmark, tag_names: 'tag-1', title: 'bookmark-1')
+    bookmark_2 = create(:bookmark, tag_names: 'tag-1', title: 'bookmark-2')
     bookmark_3 = create(:bookmark, title: 'bookmark-without-tags')
+    tag = Tag.find_by_name! 'tag-1'
 
     get :show, id: tag
 
@@ -26,9 +26,9 @@ class TagsControllerTest < ActionController::TestCase
   end
 
   test 'should display bookmarks in reverse chronological order' do
-    tag = create(:tag)
-    create(:bookmark, tags: [tag], title: 'older-bookmark', created_at: 1.month.ago)
-    create(:bookmark, tags: [tag], title: 'newer-bookmark', created_at: 1.day.ago)
+    create(:bookmark, tag_names: 'tag-1', title: 'older-bookmark', created_at: 1.month.ago)
+    create(:bookmark, tag_names: 'tag-1', title: 'newer-bookmark', created_at: 1.day.ago)
+    tag = Tag.find_by_name! 'tag-1'
 
     get :show, id: tag
 

@@ -58,8 +58,8 @@ class BookmarksControllerTest < ActionController::TestCase
   end
 
   test 'should link to the tags' do
-    tag = create(:tag, name: "tag-1")
-    create(:bookmark, tags: [tag])
+    create(:bookmark, tag_names: 'tag-1')
+    tag = Tag.find_by_name!('tag-1')
 
     get :index
 

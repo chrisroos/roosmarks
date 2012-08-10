@@ -36,15 +36,13 @@ class BookmarkTest < ActiveSupport::TestCase
     assert_equal 'my-comments', bookmark.comments
   end
 
-  test "should allow tags to be mass assigned" do
-    tag = build(:tag)
-    bookmark = Bookmark.new(tags: [tag])
-    assert_equal [tag], bookmark.tags
-  end
-
   test "should allow tag_names to be mass assigned" do
     bookmark = Bookmark.new(tag_names: 'tag-1 tag-2')
     assert_equal 'tag-1 tag-2', bookmark.tag_names
+  end
+
+  test "should not allow tags to be mass assigned" do
+    assert_raise(ActiveModel::MassAssignmentSecurity::Error) { Bookmark.new(tags: []) }
   end
 
   test "should not allow created_at to be mass assigned" do
@@ -58,5 +56,16 @@ class BookmarkTest < ActiveSupport::TestCase
   test "should return the domain of the bookmark URL" do
     bookmark = build(:bookmark, url: "http://www.example.com/foo/bar/baz")
     assert_equal 'www.example.com', bookmark.domain
+  end
+
+  test "should split the list of tags and create tag objects" do
+    bookmark = create(:bookmark, tag_names: 'tag-1 tag-2')
+    bookmark.reload
+    assert_equal [Tag.find_by_name!('tag-1'), Tag.find_by_name!('tag-2')], bookmark.tags
+  end
+
+  test "should not create duplicate tags" do
+    bookmark = create(:bookmark, tag_names: 'tag-1 tag-1')
+    assert_equal [Tag.find_by_name!('tag-1')], bookmark.tags
   end
 end
