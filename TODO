@@ -16,8 +16,6 @@
 
 * Create a simple chrome extension that'll tell me whether I've previously bookmarked the page I'm looking at
 
-* Investigate the heroku email about migrating the database
-
 * Add autocomplete for tag suggestions
 
 * Display the date of the roosmark
@@ -29,8 +27,6 @@
 * Ad-hoc notes against tags (similar to pinboard's idea of notes)
 
 * Display acronyms differently?
-
-* Useful error messages when bookmark addition fails (e.g. due to validation error) - see the wip-display-validation-errors branch
 
 * Close the bookmarklet popup window after successfully adding a bookmark.
 
