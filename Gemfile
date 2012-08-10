@@ -19,6 +19,7 @@ group :development do
   gem 'taps'
   gem 'foreman'
   gem 'sqlite3'
+  gem 'brakeman'
 end
 
 group :test do
