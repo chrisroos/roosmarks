@@ -1,6 +1,15 @@
 require "test_helper"
 
 class TagsControllerTest < ActionController::TestCase
+  test 'should set the #show page title' do
+    tag = create(:tag, name: 'my-tag')
+    create(:bookmark, tags: [tag])
+
+    get :show, id: tag
+
+    assert_select 'title', text: 'Bookmarks tagged with my-tag | Roosmarks'
+  end
+
   test "should display all bookmarks for the tag" do
     tag = create(:tag)
     bookmark_1 = create(:bookmark, tags: [tag], title: 'bookmark-1')
@@ -15,7 +24,7 @@ class TagsControllerTest < ActionController::TestCase
       assert_select '.bookmark .title', text: 'bookmark-without-tags', count: 0
     end
   end
-  
+
   test 'should display bookmarks in reverse chronological order' do
     tag = create(:tag)
     create(:bookmark, tags: [tag], title: 'older-bookmark', created_at: 1.month.ago)
@@ -33,6 +42,15 @@ class TagsControllerTest < ActionController::TestCase
     get :show, id: tag
 
     assert_select ".description a[href=http://example.com]"
+  end
+
+  test 'should set the #edit page title' do
+    login!
+    tag = create(:tag, name: 'my-tag')
+
+    get :edit, id: tag
+
+    assert_select 'title', text: 'Edit my-tag | Roosmarks'
   end
 
   test 'should prevent unauthenticated users from accessing the edit tag form' do

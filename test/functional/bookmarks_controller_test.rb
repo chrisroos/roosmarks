@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class BookmarksControllerTest < ActionController::TestCase
+  test 'should set the #index page title' do
+    get :index
+
+    assert_select 'title', text: 'All bookmarks | Roosmarks'
+  end
+
   test 'should display bookmarks in reverse chronological order' do
     create(:bookmark, title: 'older-bookmark', created_at: 1.month.ago)
     create(:bookmark, title: 'newer-bookmark', created_at: 1.day.ago)
@@ -87,6 +93,14 @@ class BookmarksControllerTest < ActionController::TestCase
     get :index, format: 'atom'
 
     assert_select 'content', text: 'bookmark-1'
+  end
+
+  test 'should set the #new page title' do
+    login!
+
+    get :new
+
+    assert_select 'title', text: 'New bookmark | Roosmarks'
   end
 
   test 'should prevent unauthenticated users from accessing the new bookmarks form' do

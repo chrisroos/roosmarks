@@ -1,5 +1,8 @@
 %h1 New bookmark
 
+- content_for :page_title do
+  New bookmark
+
 = twitter_bootstrap_form_for(@bookmark, html: {class: 'new_bookmark form-horizontal'}) do |bookmark_form|
   %fieldset
 

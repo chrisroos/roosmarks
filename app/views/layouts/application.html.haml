@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %title Bookmarks
+    %title= "#{yield(:page_title).chomp} | Roosmarks"
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = yield :atom_feed_link

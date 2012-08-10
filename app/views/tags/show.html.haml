@@ -1,5 +1,8 @@
 %h1 Bookmarks tagged with #{@tag.name}
 
+- content_for :page_title do
+  Bookmarks tagged with #{@tag.name}
+
 - if @tag.description.present?
   .description.well= markdown_to_html(@tag.description)
 
