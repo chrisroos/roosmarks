@@ -35,3 +35,5 @@
 * What does Brakeman say about roosmarks?
 
 * Do I need to update the Heroku installation instructions now that Cedar is the default stack and shared-database has been deprecated in favour of pg:dev?
+
+* Add categories/tags to the atom feed
