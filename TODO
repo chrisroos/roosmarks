@@ -1,3 +1,5 @@
+* DRY up the bookmarks new and edit templates.
+
 * DRY up h1 page title and html head title
 
 * Maybe separate bookmarks into week/some-other-time-period buckets
