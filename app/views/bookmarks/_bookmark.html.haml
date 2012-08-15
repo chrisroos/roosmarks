@@ -4,6 +4,9 @@
       = link_to bookmark.title, bookmark.url, class: 'title'
       \-
       %span.domain= bookmark.domain
+      \-
+      = link_to edit_bookmark_path(bookmark), title: "Edit the bookmark for #{bookmark.url}" do
+        %i.icon-edit
     .comments
       = markdown_to_html(bookmark.comments)
     .tags

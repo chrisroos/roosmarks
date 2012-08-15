@@ -29,7 +29,7 @@ class ActionDispatch::IntegrationTest
   end
 
   def given_a_user_bookmarks(attributes)
-    unknown_keys = attributes.keys - [:url, :title, :tags]
+    unknown_keys = attributes.keys - [:url, :title, :tags, :comments]
     raise "Unknown keys: #{unknown_keys}" if unknown_keys.any?
 
     login!
@@ -38,7 +38,19 @@ class ActionDispatch::IntegrationTest
     fill_in "Url", with: attributes[:url]
     fill_in "Title", with: attributes[:title]
     fill_in "Tags", with: attributes[:tags]
+    fill_in "Comments", with: attributes[:comments]
     click_button "Create bookmark"
+  end
+
+  def and_a_user_edits_the_bookmark(attributes)
+    unknown_keys = attributes.keys - [:url, :title, :tags, :comments]
+    raise "Unknown keys: #{unknown_keys}" if unknown_keys.any?
+
+    click_link "Edit the bookmark for #{attributes[:url]}"
+    fill_in "Title", with: attributes[:title]
+    fill_in "Tags", with: attributes[:tags]
+    fill_in "Comments", with: attributes[:comments]
+    click_button "Update bookmark"
   end
 
   def when_viewing_the_tag_page(tag_name)
@@ -57,14 +69,15 @@ class ActionDispatch::IntegrationTest
   end
 
   def assert_bookmark_visible(attributes)
-    unknown_keys = attributes.keys - [:url, :title, :tags]
+    unknown_keys = attributes.keys - [:url, :title, :tags, :comments]
     raise "Unknown keys: #{unknown_keys}" if unknown_keys.any?
 
-    assert page.has_css?("#bookmarks .bookmark a[href='#{attributes[:url]}']")
-    assert page.has_css?('#bookmarks .bookmark .title', text: attributes[:title])
+    assert page.has_css?("#bookmarks .bookmark a[href='#{attributes[:url]}']"), "expected bookmark to link to '#{attributes[:url]}'"
+    assert page.has_css?('#bookmarks .bookmark .title', text: attributes[:title]), "expected bookmark to be titled '#{attributes[:title]}'"
     (attributes[:tags] || '').split(' ').each do |tag|
-      assert page.has_css?('#bookmarks .bookmark .tags', text: tag)
+      assert page.has_css?('#bookmarks .bookmark .tags', text: tag), "expected bookmark to be tagged with '#{attributes[:tag]}'"
     end
+    assert page.has_css?('#bookmarks .bookmark .comments', text: attributes[:comments]), "expected bookmark to have comment '#{attributes[:comments]}'"
   end
 
   def assert_tag_attributes(attributes)

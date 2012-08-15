@@ -1,0 +1,38 @@
+%h1 Edit bookmark
+
+- content_for :page_title do
+  Edit bookmark
+
+= twitter_bootstrap_form_for(@bookmark, html: {class: 'new_bookmark form-horizontal'}) do |bookmark_form|
+  %fieldset
+
+    %legend Details of the page to bookmark
+
+    = bookmark_form.control_group :url, required: true do
+      = bookmark_form.label :url, class: 'control-label'
+      .controls
+        = bookmark_form.text_field :url, class: 'input-xlarge', required: true, readonly: true
+        -if @bookmark.errors[:url].any?
+          .help-inline Please enter a unique URL
+
+    = bookmark_form.control_group :title, required: true do
+      = bookmark_form.label :title, class: 'control-label'
+      .controls
+        = bookmark_form.text_field :title, class: 'input-xlarge', required: true
+        -if @bookmark.errors[:title].any?
+          .help-inline Please enter a title
+
+    .control-group
+      = bookmark_form.label :tag_names, 'Tags', class: 'control-label'
+      .controls
+        = bookmark_form.text_field :tag_names, class: 'input-xlarge'
+        .help-block Tags are space separated
+
+    .control-group
+      = bookmark_form.label :comments, class: 'control-label'
+      .controls
+        = bookmark_form.text_area :comments, rows: 5, class: 'input-xlarge'
+        .help-block Markdown is supported
+
+    .form-actions
+      = bookmark_form.submit 'Update bookmark', class: 'btn-primary'

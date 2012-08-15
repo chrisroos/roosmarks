@@ -95,6 +95,14 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select 'content', text: 'bookmark-1'
   end
 
+  test 'should link to the edit form for a bookmark' do
+    bookmark = create(:bookmark)
+
+    get :index
+
+    assert_select "a[href='#{edit_bookmark_path(bookmark)}'][title='Edit the bookmark for #{bookmark.url}']"
+  end
+
   test 'should set the #new page title' do
     login!
 
@@ -119,7 +127,7 @@ class BookmarksControllerTest < ActionController::TestCase
       assert_select "input[type=text][name='bookmark[title]']"
       assert_select "input[type=text][name='bookmark[tag_names]']"
       assert_select "textarea[name='bookmark[comments]']"
-      assert_select 'input[type=submit]'
+      assert_select "input[type=submit][value='Create bookmark']"
     end
   end
 
@@ -196,6 +204,120 @@ class BookmarksControllerTest < ActionController::TestCase
     login!
 
     post :create, bookmark: {url: 'http://example.com', title: 'Example.com'}
+
+    assert_redirected_to bookmarks_path
+  end
+
+  test 'should set the #edit page title' do
+    login!
+    bookmark = create(:bookmark)
+
+    get :edit, id: bookmark
+
+    assert_select 'title', text: 'Edit bookmark | Roosmarks'
+  end
+
+  test 'should prevent unauthenticated users from accessing the edit bookmarks form' do
+    bookmark = create(:bookmark)
+
+    get :edit, id: bookmark
+
+    assert_response :unauthorized
+  end
+
+  test 'should display all fields and values when editing a bookmark' do
+    login!
+    bookmark = create(:bookmark, url: 'http://example.com', title: 'my-title', tag_names: 'tag-1 tag-2', comments: 'my-comment')
+
+    get :edit, id: bookmark
+
+    assert_select "form[action='#{bookmark_path(bookmark)}'][method=post]" do
+      assert_select "input[type=text][name='bookmark[url]'][readonly='readonly'][value='http://example.com']"
+      assert_select "input[type=text][name='bookmark[title]'][value='my-title']"
+      assert_select "input[type=text][name='bookmark[tag_names]'][value='tag-1 tag-2']"
+      assert_select "textarea[name='bookmark[comments]']", text: 'my-comment'
+      assert_select "input[type=submit][value='Update bookmark']"
+    end
+  end
+
+  test 'should add the required atttribute to the required fields in the edit form' do
+    login!
+    bookmark = create(:bookmark)
+
+    get :edit, id: bookmark
+
+    assert_select "form[action='#{bookmark_path(bookmark)}'][method=post]" do
+      assert_select "input[name='bookmark[url]'][required='required']"
+      assert_select "input[name='bookmark[title]'][required='required']"
+    end
+  end
+
+  test 'should add a class to the required control-groups in the edit form' do
+    login!
+    bookmark = create(:bookmark)
+
+    get :edit, id: bookmark
+
+    assert_select "form[action='#{bookmark_path(bookmark)}'][method=post]" do
+      assert_select ".required input[name='bookmark[url]']"
+      assert_select ".required input[name='bookmark[title]']"
+    end
+  end
+
+  test 'should prevent unauthenticated users from updating bookmarks' do
+    bookmark = create(:bookmark)
+    post :update, id: bookmark, bookmark: {}
+
+    assert_response :unauthorized
+  end
+
+  test 'should allow a bookmark to be updated' do
+    login!
+    bookmark = create(:bookmark, title: 'original-title', tag_names: 'original-tag', comments: 'original-comments')
+
+    post :update, id: bookmark, bookmark: {title: 'new-title', tag_names: 'new-tag', comments: 'new-comments'}
+
+    assert_equal 'new-title', bookmark.reload.title
+    assert_equal 'new-tag', bookmark.reload.tag_names
+    assert_equal 'new-comments', bookmark.reload.comments
+  end
+
+  test 'should not allow the url to be updated' do
+    login!
+    bookmark = create(:bookmark, url: 'original-url')
+
+    post :update, id: bookmark, bookmark: {url: 'new-url'}
+
+    assert_equal 'original-url', bookmark.reload.url
+  end
+
+  test 'should display errors messages if the bookmark update failed' do
+    login!
+    bookmark = create(:bookmark)
+
+    post :update, id: bookmark, bookmark: {title: ''}
+
+    assert_select '.error #bookmark_title'
+    assert_select '.error', text: /Please enter a title/
+  end
+
+  test 'should populate the form with the bookmark attributes if the update fails' do
+    login!
+    bookmark = create(:bookmark, url: 'url', title: 'title', tag_names: 'tag-names', comments: 'comments')
+
+    post :update, id: bookmark, bookmark: {title: ''}
+
+    assert_select "input[name='bookmark[url]'][value='url']"
+    assert_select "input[name='bookmark[title]'][value='']"
+    assert_select "input[name='bookmark[tag_names]'][value='tag-names']"
+    assert_select "textarea[name='bookmark[comments]']", text: 'comments'
+  end
+
+  test 'should redirect to the list of bookmarks after update' do
+    login!
+    bookmark = create(:bookmark)
+
+    post :update, id: bookmark, bookmark: {title: bookmark.title}
 
     assert_redirected_to bookmarks_path
   end

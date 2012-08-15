@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  before_filter :authenticate, only: [:new, :create]
+  before_filter :authenticate, only: [:new, :create, :edit, :update]
 
   def index
     @bookmarks = Bookmark.order('created_at DESC')
@@ -19,6 +19,21 @@ class BookmarksController < ApplicationController
       redirect_to bookmarks_path
     else
       render :new
+    end
+  end
+
+  def edit
+    @bookmark = Bookmark.find(params[:id])
+  end
+
+  def update
+    @bookmark = Bookmark.find(params[:id])
+    bookmark_params = params[:bookmark]
+    bookmark_params.delete(:url)
+    if @bookmark.update_attributes(bookmark_params)
+      redirect_to bookmarks_path
+    else
+      render :edit
     end
   end
 end

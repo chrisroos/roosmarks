@@ -30,8 +30,6 @@
 
 * Allow singular 'bookmarks' to be displayed.  This might become more relevant if/when you can add multiple comments to a bookmark.
 
-* Bookmarks should be editable.
-
 * Is there a way of automatically associating a bookmark with another URL/bookmark. I'm thinking about all the bookmarks I've found because of Gina's google plus post.  Maybe just a referrer/via/hat-tip type field is good enough?
 
 * Do I need to update the Heroku installation instructions now that Cedar is the default stack and shared-database has been deprecated in favour of pg:dev?
