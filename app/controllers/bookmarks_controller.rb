@@ -10,7 +10,11 @@ class BookmarksController < ApplicationController
   end
 
   def new
-    @bookmark = Bookmark.new(url: params[:url], title: params[:title])
+    if bookmark = Bookmark.find_by_url(params[:url])
+      redirect_to edit_bookmark_path(bookmark)
+    else
+      @bookmark = Bookmark.new(url: params[:url], title: params[:title])
+    end
   end
 
   def create

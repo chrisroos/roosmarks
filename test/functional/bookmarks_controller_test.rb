@@ -162,6 +162,15 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select "input[name='bookmark[title]'][value='example.com']"
   end
 
+  test 'should redirect to the edit form of the existing bookmark if the url has previously been bookmarked' do
+    login!
+    bookmark = create(:bookmark, url: 'http://example.com')
+
+    get :new, url: 'http://example.com'
+
+    assert_redirected_to edit_bookmark_path(bookmark)
+  end
+
   test 'should prevent unauthenticated users from creating new bookmarks' do
     post :create, bookmark: {}
 
