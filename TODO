@@ -1,3 +1,7 @@
+* Automatically add the referrer (`document.referrer`) to the bookmark if available. It should be possible to overwrite this manually. This will allow you to collect data about where you found links in the first place.
+
+* Have a view of all bookmarks that's grouped by day - something like a tumblr/traditional blog view.
+
 * Auto expand the text box as you're typing.
 
 * Add preview functionality to markdown descriptions
