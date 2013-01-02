@@ -1,3 +1,5 @@
+* Make it easy to see all bookmarks for a given domain, e.g. everything I've bookmarked on imgur.com (similar to displaying stats per domain)
+
 * Automatically add the referrer (`document.referrer`) to the bookmark if available. It should be possible to overwrite this manually. This will allow you to collect data about where you found links in the first place.
 
 * Have a view of all bookmarks that's grouped by day - something like a tumblr/traditional blog view.
