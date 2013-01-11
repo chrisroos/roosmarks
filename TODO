@@ -1,3 +1,7 @@
+* Use the 'edit' icon rather than a button with 'edit' text on the tags show page (e.g. https://roosmarks.herokuapp.com/tags/48).
+
+* Make lists (ul, ol) look OK in the body of a bookmark's description - at the moment they don't have any list icons and the spacing doesn't look quite right.
+
 * Make it easy to see all bookmarks for a given domain, e.g. everything I've bookmarked on imgur.com (similar to displaying stats per domain)
 
 * Automatically add the referrer (`document.referrer`) to the bookmark if available. It should be possible to overwrite this manually. This will allow you to collect data about where you found links in the first place.
