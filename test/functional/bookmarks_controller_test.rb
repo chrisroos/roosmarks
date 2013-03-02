@@ -192,6 +192,15 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select ".bookmark a[href=#{tag_path(tag)}]", text: "tag-1"
   end
 
+  test '#show responds with a json document of the bookmark' do
+    bookmark = create(:bookmark)
+
+    get :show, url: bookmark.url, format: 'json'
+
+    json_bookmark = ActiveSupport::JSON.decode @response.body
+    assert_equal bookmark.title, json_bookmark['title']
+  end
+
   test 'should set the #new page title' do
     login!
 

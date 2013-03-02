@@ -16,6 +16,12 @@ class BookmarksController < ApplicationController
       return
     end
     @bookmark = Bookmark.find_by_url!(params[:url])
+    respond_to do |format|
+      format.html
+      format.json do
+        render :json => @bookmark
+      end
+    end
   end
 
   def new
