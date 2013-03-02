@@ -5,6 +5,8 @@
       \-
       %span.domain= bookmark.domain
       \-
+      = link_to bookmark_path(bookmark), title: "View the bookmark for #{bookmark.url}" do
+        %i.icon-arrow-right
       = link_to edit_bookmark_path(bookmark), title: "Edit the bookmark for #{bookmark.url}" do
         %i.icon-edit
     .comments

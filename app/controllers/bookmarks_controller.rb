@@ -9,6 +9,10 @@ class BookmarksController < ApplicationController
     end
   end
 
+  def show
+    @bookmark = Bookmark.find(params[:id])
+  end
+
   def new
     if bookmark = Bookmark.find_by_url(params[:url])
       redirect_to edit_bookmark_path(bookmark)

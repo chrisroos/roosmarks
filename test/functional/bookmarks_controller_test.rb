@@ -103,6 +103,71 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select "a[href='#{edit_bookmark_path(bookmark)}'][title='Edit the bookmark for #{bookmark.url}']"
   end
 
+  test 'should link to the show page for the bookmark' do
+    bookmark = create(:bookmark)
+
+    get :index
+
+    assert_select "a[href='#{bookmark_path(bookmark)}'][title='View the bookmark for #{bookmark.url}']"
+  end
+
+  test '#show should set the page title' do
+    bookmark = create(:bookmark, url: 'http://example.com')
+
+    get :show, id: bookmark
+
+    assert_select 'title', text: 'Bookmark for http://example.com | Roosmarks'
+  end
+
+  test '#show should display the bookmark title' do
+    bookmark = create(:bookmark, title: 'Example.com')
+
+    get :show, id: bookmark
+
+    assert_select '.bookmark .title', text: "Example.com"
+  end
+
+  test '#show should display the domain of the bookmarked page' do
+    bookmark = create(:bookmark, url: 'http://www.example.com/foo/bar/baz')
+
+    get :show, id: bookmark
+
+    assert_select '.bookmark .domain', text: 'www.example.com'
+  end
+
+  test '#show should display the bookmark comments' do
+    bookmark = create(:bookmark, comments: 'bookmark-comments')
+
+    get :show, id: bookmark
+
+    assert_select '.bookmark .comments', text: "bookmark-comments"
+  end
+
+  test '#show should automatically link to URLs in comments' do
+    bookmark = create(:bookmark, comments: 'http://example.com')
+
+    get :show, id: bookmark
+
+    assert_select ".bookmark .comments a[href=http://example.com]"
+  end
+
+  test '#show should link to the bookmarked url' do
+    bookmark = create(:bookmark, url: 'http://example.com')
+
+    get :show, id: bookmark
+
+    assert_select "a[href='http://example.com']"
+  end
+
+  test '#show should link to the tags' do
+    bookmark = create(:bookmark, tag_names: 'tag-1')
+    tag = Tag.find_by_name!('tag-1')
+
+    get :show, id: bookmark
+
+    assert_select ".bookmark a[href=#{tag_path(tag)}]", text: "tag-1"
+  end
+
   test 'should set the #new page title' do
     login!
 
