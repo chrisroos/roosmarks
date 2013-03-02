@@ -111,6 +111,12 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_select "a[href='#{bookmark_path(bookmark)}'][title='View the bookmark for #{bookmark.url}']"
   end
 
+  test "#show blocks robots from indexing these pages as I'm not convinced about the value of having these in the search index" do
+    bookmark = create(:bookmark)
+    get :show, url: bookmark.url
+    assert_select "meta[name='robots'][content='noindex']"
+  end
+
   test '#show should set the page title' do
     bookmark = create(:bookmark, url: 'http://example.com')
 

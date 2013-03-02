@@ -1,6 +1,9 @@
 - content_for :page_title do
   Bookmark for #{@bookmark.url}
-  
+
+- content_for :additional_page_header_content do
+  %meta{:name => 'robots', :content => 'noindex'}
+
 .well.bookmark
   %p
     = link_to @bookmark.title, @bookmark.url, class: 'title'

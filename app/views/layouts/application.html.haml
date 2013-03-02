@@ -6,6 +6,7 @@
     = javascript_include_tag "application"
     = yield :atom_feed_link
     = csrf_meta_tags
+    = yield :additional_page_header_content
   %body
     .navbar.navbar-fixed-top
       .navbar-inner
