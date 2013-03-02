@@ -114,15 +114,33 @@ class BookmarksControllerTest < ActionController::TestCase
   test '#show should set the page title' do
     bookmark = create(:bookmark, url: 'http://example.com')
 
-    get :show, id: bookmark
+    get :show, url: bookmark.url
 
     assert_select 'title', text: 'Bookmark for http://example.com | Roosmarks'
+  end
+
+  test '#show finds bookmarks by id and redirects to the canonical url' do
+    bookmark = create(:bookmark)
+    get :show, url: bookmark
+    assert_redirected_to bookmark_path(CGI.escape(bookmark.url))
+  end
+
+  test '#show finds bookmarks by url' do
+    bookmark = create(:bookmark)
+    get :show, url: bookmark.url
+    assert_response :success
+  end
+
+  test "#show raises an ActiveRecord::RecordNotFound error if the bookmark doesn't exist" do
+    assert_raise(ActiveRecord::RecordNotFound) do
+      get :show, url: 'non-existent-url'
+    end
   end
 
   test '#show should display the bookmark title' do
     bookmark = create(:bookmark, title: 'Example.com')
 
-    get :show, id: bookmark
+    get :show, url: bookmark.url
 
     assert_select '.bookmark .title', text: "Example.com"
   end
@@ -130,7 +148,7 @@ class BookmarksControllerTest < ActionController::TestCase
   test '#show should display the domain of the bookmarked page' do
     bookmark = create(:bookmark, url: 'http://www.example.com/foo/bar/baz')
 
-    get :show, id: bookmark
+    get :show, url: bookmark.url
 
     assert_select '.bookmark .domain', text: 'www.example.com'
   end
@@ -138,7 +156,7 @@ class BookmarksControllerTest < ActionController::TestCase
   test '#show should display the bookmark comments' do
     bookmark = create(:bookmark, comments: 'bookmark-comments')
 
-    get :show, id: bookmark
+    get :show, url: bookmark.url
 
     assert_select '.bookmark .comments', text: "bookmark-comments"
   end
@@ -146,7 +164,7 @@ class BookmarksControllerTest < ActionController::TestCase
   test '#show should automatically link to URLs in comments' do
     bookmark = create(:bookmark, comments: 'http://example.com')
 
-    get :show, id: bookmark
+    get :show, url: bookmark.url
 
     assert_select ".bookmark .comments a[href=http://example.com]"
   end
@@ -154,7 +172,7 @@ class BookmarksControllerTest < ActionController::TestCase
   test '#show should link to the bookmarked url' do
     bookmark = create(:bookmark, url: 'http://example.com')
 
-    get :show, id: bookmark
+    get :show, url: bookmark.url
 
     assert_select "a[href='http://example.com']"
   end
@@ -163,7 +181,7 @@ class BookmarksControllerTest < ActionController::TestCase
     bookmark = create(:bookmark, tag_names: 'tag-1')
     tag = Tag.find_by_name!('tag-1')
 
-    get :show, id: bookmark
+    get :show, url: bookmark.url
 
     assert_select ".bookmark a[href=#{tag_path(tag)}]", text: "tag-1"
   end

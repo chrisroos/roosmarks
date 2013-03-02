@@ -10,7 +10,12 @@ class BookmarksController < ApplicationController
   end
 
   def show
-    @bookmark = Bookmark.find(params[:id])
+    if params[:url] =~ /^\d+$/
+      bookmark = Bookmark.find(params[:url])
+      redirect_to bookmark_path(CGI.escape(bookmark.url))
+      return
+    end
+    @bookmark = Bookmark.find_by_url!(params[:url])
   end
 
   def new

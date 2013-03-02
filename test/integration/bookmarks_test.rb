@@ -16,4 +16,10 @@ class BookmarksTest < ActionDispatch::IntegrationTest
     and_a_user_edits_the_bookmark url: "http://example.com", title: "new-title", tags: "new-tag", comments: "new-comments"
     assert_bookmark_visible url: "http://example.com", title: "new-title", tags: "new-tag", comments: "new-comments"
   end
+
+  test "viewing a single bookmark" do
+    given_a_user_bookmarks url: "http://example.com", title: "original-title", tags: "original-tag", comments: "original-comments"
+    get "/bookmarks/#{CGI.escape('http://example.com')}"
+    assert_bookmark_visible url: "http://example.com", title: "original-title", tags: "original-tag", comments: "original-comments"
+  end
 end
