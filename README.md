@@ -6,6 +6,18 @@ I'm going to use this project to explore some ideas I've got about how bookmarki
 
 I currently have a version hosted on [Heroku][] at [roosmarks][].
 
+## Using Javascript to retrieve a bookmark
+
+    url = 'https://roosmarks.herokuapp.com/bookmarks/'
+    url = url + encodeURIComponent(document.location.href)
+    var req = new XMLHttpRequest();
+    req.onload = function() {
+      console.log(this.responseText);
+    };
+    req.open('get', url, true)
+    req.setRequestHeader('Accept', 'application/json')
+    req.send()
+
 ## Development
 
 ### Pre-requisites
