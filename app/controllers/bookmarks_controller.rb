@@ -19,6 +19,7 @@ class BookmarksController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
+        headers['Access-Control-Allow-Origin'] = '*'
         render :json => @bookmark
       end
     end

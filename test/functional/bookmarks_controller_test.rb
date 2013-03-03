@@ -201,6 +201,14 @@ class BookmarksControllerTest < ActionController::TestCase
     assert_equal bookmark.title, json_bookmark['title']
   end
 
+  test '#show allows access from anywhere when requesting a json representation of a bookmark' do
+    bookmark = create(:bookmark)
+
+    get :show, url: bookmark.url, format: 'json'
+
+    assert_equal '*', response.headers['Access-Control-Allow-Origin']
+  end
+
   test 'should set the #new page title' do
     login!
 
