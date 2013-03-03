@@ -21,7 +21,7 @@ class ActionDispatch::IntegrationTest
 
   def visit_tag_page(tag_name)
     visit "/"
-    click_link tag_name
+    first(:link, tag_name).click
   end
 
   def login!
@@ -63,7 +63,7 @@ class ActionDispatch::IntegrationTest
 
     tag = Tag.find_by_name!(attributes[:tag])
     visit tag_path(tag)
-    click_link "Edit"
+    click_link "Edit tag"
     fill_in "Description", with: attributes[:description]
     click_button "Update tag"
   end

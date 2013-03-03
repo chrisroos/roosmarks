@@ -6,7 +6,7 @@
 - if @tag.description.present?
   .description.well= markdown_to_html(@tag.description)
 
-= link_to "Edit", edit_tag_path(@tag), class: 'btn'
+= link_to "Edit tag", edit_tag_path(@tag), class: 'btn'
 
 %ul#bookmarks
   - @bookmarks.each do |bookmark|
