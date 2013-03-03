@@ -48,8 +48,6 @@
 
 * Close the bookmarklet popup window after successfully adding a bookmark.
 
-* Allow singular 'bookmarks' to be displayed.  This might become more relevant if/when you can add multiple comments to a bookmark.
-
 * Is there a way of automatically associating a bookmark with another URL/bookmark. I'm thinking about all the bookmarks I've found because of Gina's google plus post.  Maybe just a referrer/via/hat-tip type field is good enough?  Maybe I could have some shortcut that pulls up an autocomplete list of all other bookmarks I've saved - that'd make it easier to bookmark (in this example) Gina's post and then autocomplete a link to that when I'm bookmarking all the services referred to within it.
 
 * Do I need to update the Heroku installation instructions now that Cedar is the default stack and shared-database has been deprecated in favour of pg:dev?
