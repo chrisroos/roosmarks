@@ -8,13 +8,12 @@ class BookmarksControllerTest < ActionController::TestCase
   end
 
   test 'should display bookmarks in reverse chronological order' do
-    create(:bookmark, title: 'older-bookmark', created_at: 1.month.ago)
-    create(:bookmark, title: 'newer-bookmark', created_at: 1.day.ago)
+    old_bookmark = create(:bookmark, title: 'older-bookmark', created_at: 1.month.ago)
+    new_bookmark = create(:bookmark, title: 'newer-bookmark', created_at: 1.day.ago)
 
     get :index
 
-    assert_select '#bookmarks .bookmark:first-child .title', text: 'newer-bookmark'
-    assert_select '#bookmarks .bookmark:last-child .title', text: 'older-bookmark'
+    assert_equal [new_bookmark, old_bookmark], assigns(:bookmarks).values.flatten
   end
 
   test 'should display the bookmark title' do
@@ -435,5 +434,22 @@ class BookmarksControllerTest < ActionController::TestCase
     post :update, id: bookmark, bookmark: {title: bookmark.title}
 
     assert_redirected_to bookmarks_path
+  end
+
+  test 'should group bookmarks by day' do
+    old_bookmark = create(:bookmark, created_at: Date.parse('2013-03-14'))
+    newer_bookmark_1 = create(:bookmark, created_at: Date.parse('2013-03-15'))
+    newer_bookmark_2 = create(:bookmark, created_at: Date.parse('2013-03-15'))
+
+    get :index
+
+    assert_select "section[title='Bookmarks for Thursday, 14th March 2013']" do
+      assert_select 'h2', 'Thursday, 14th March 2013'
+      assert_select '.bookmark', count: 1
+    end
+    assert_select "section[title='Bookmarks for Friday, 15th March 2013']" do
+      assert_select 'h2', 'Friday, 15th March 2013'
+      assert_select '.bookmark', count: 2
+    end
   end
 end

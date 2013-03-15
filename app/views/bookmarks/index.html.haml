@@ -7,5 +7,8 @@
   %link{rel: 'alternate', type: 'application/atom+xml', href: bookmarks_url(format: 'atom'), title: 'Atom feed of all bookmarks'}
 
 %ul#bookmarks
-  - @bookmarks.each do |bookmark|
-    = render partial: 'bookmark', object: bookmark
+  - @bookmarks.each do |(created, bookmarks)|
+    %section{title: "Bookmarks for #{created.to_formatted_s(:friendly_date)}"}
+      %h2= created.to_formatted_s(:friendly_date)
+      - bookmarks.each do |bookmark|
+        = render partial: 'bookmark', object: bookmark

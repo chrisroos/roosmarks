@@ -2,10 +2,13 @@ class BookmarksController < ApplicationController
   before_filter :authenticate, only: [:new, :create, :edit, :update]
 
   def index
-    @bookmarks = Bookmark.order('created_at DESC')
     respond_to do |format|
-      format.html
-      format.atom
+      format.html do
+        @bookmarks = Bookmark.order('created_at DESC').group_by { |b| b.created_at.to_date }
+      end
+      format.atom do
+        @bookmarks = Bookmark.order('created_at DESC')
+      end
     end
   end
 
