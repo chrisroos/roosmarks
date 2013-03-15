@@ -1,3 +1,5 @@
+* Use the canonical URL, if available, when bookmarking a page. I noticed this morning that I've bookmarked http://buzzmachine.com/2013/03/13/ny-times-technobias/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+buzzmachine+%28BuzzMachine%29, while the canonical url is the same without the analytics querystring.
+
 * DRY up the bookmark partial and bookmarks/show template. Also don't include the <li> in the bookmark partial.
 
 * Use the 'edit' icon rather than a button with 'edit' text on the tags show page (e.g. https://roosmarks.herokuapp.com/tags/48).
@@ -7,8 +9,6 @@
 * Make it easy to see all bookmarks for a given domain, e.g. everything I've bookmarked on imgur.com (similar to displaying stats per domain)
 
 * Automatically add the referrer (`document.referrer`) to the bookmark if available. It should be possible to overwrite this manually. This will allow you to collect data about where you found links in the first place.
-
-* Have a view of all bookmarks that's grouped by day - something like a tumblr/traditional blog view.
 
 * Auto expand the text box as you're typing.
 
