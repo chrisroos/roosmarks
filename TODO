@@ -1,3 +1,5 @@
+* DRY up the bookmark partial and bookmarks/show template. Also don't include the <li> in the bookmark partial.
+
 * Use the 'edit' icon rather than a button with 'edit' text on the tags show page (e.g. https://roosmarks.herokuapp.com/tags/48).
 
 * Make lists (ul, ol) look OK in the body of a bookmark's description - at the moment they don't have any list icons and the spacing doesn't look quite right.
