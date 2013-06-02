@@ -16,8 +16,6 @@ group :assets do
 end
 
 group :development do
-  gem 'heroku'
-  gem 'taps'
   gem 'foreman'
   gem 'sqlite3'
   gem 'brakeman'
