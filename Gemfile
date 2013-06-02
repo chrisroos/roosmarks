@@ -9,6 +9,7 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'thin'
 gem 'redcarpet'
+gem 'embedly'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

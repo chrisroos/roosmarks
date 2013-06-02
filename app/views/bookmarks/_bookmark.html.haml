@@ -8,6 +8,8 @@
         %i.icon-arrow-right
       = link_to edit_bookmark_path(bookmark), title: "Edit the bookmark for #{bookmark.url}" do
         %i.icon-edit
+    .media
+      = image_tag bookmark.image_url, class: 'img-polaroid' if bookmark.image_url
     .comments
       = markdown_to_html(bookmark.comments)
     .tags
