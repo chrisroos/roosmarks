@@ -1,6 +1,7 @@
 %li.bookmark
   .well
     %p
+      = image_tag bookmark.favicon_url, size: '16x16'
       = link_to bookmark.title, bookmark.url, class: 'title'
     %p.domain-and-actions
       %span.domain= bookmark.domain

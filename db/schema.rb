@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120810153338) do
+ActiveRecord::Schema.define(:version => 20130602214413) do
 
   create_table "bookmarks", :force => true do |t|
     t.string   "url"
     t.string   "title"
     t.text     "comments"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "tag_names"
+    t.string   "favicon_url"
   end
 
   add_index "bookmarks", ["url"], :name => "index_bookmarks_on_url", :unique => true
