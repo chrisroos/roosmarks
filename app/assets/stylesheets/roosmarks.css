@@ -4,7 +4,7 @@ body {
 ul#bookmarks {
   margin-left: 0;
 }
-#bookmarks li {
+#bookmarks li.bookmark {
   list-style: none;
   padding: 0.5em 0;
 }
