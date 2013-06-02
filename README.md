@@ -22,7 +22,7 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
 
 ### Pre-requisites
 
-* [Ruby][]
+* [Ruby][] 1.9.2 or above
 * [Rubygems][] and [Bundler][]
 * [libxml2][] and [libxslt][] (for [Nokogiri][])
 * [sqlite3][] development headers (for [Taps][])
@@ -40,11 +40,17 @@ I currently have a version hosted on [Heroku][] at [roosmarks][].
 
 ## Deploying to Heroku
 
-    $ heroku create --stack cedar
+You'll need the [Heroku Toolbelt](https://toolbelt.heroku.com/) in order to deploy to Heroku.
+
+    $ git clone https://github.com/chrisroos/roosmarks.git
+    $ cd roosmarks
+    $ heroku apps:create your-chosen-app-name-here
     $ heroku config:add ROOSMARKS_USERNAME=your-username-here
     $ heroku config:add ROOSMARKS_PASSWORD=your-password-here
     $ git push heroku master
     $ heroku run rake db:migrate
+
+All being well, you've now got your own copy of Roosmarks running on Heroku. You can visit it at http://your-chosen-app-name-here.herokuapp.com.
 
 ## FreeBSD specific installation notes
 
