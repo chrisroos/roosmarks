@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.1.1
+  - 2.1.6
 before_script:
   - "psql -c 'create database roosmarks_test;' -U postgres"
   - "bundle exec rake db:schema:load"
